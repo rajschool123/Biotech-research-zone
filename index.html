@@ -3,80 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BiotechNotesHub - Home</title>
+    <title>Biotech Research Hub & Ecosystem</title>
     <style>
-        /* Eco-Friendly / Nature Theme */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f9f5; color: #333; }
+        /* Eco-Friendly & Professional Research Theme */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f9f5; color: #2c3e50; }
         
-        /* Modern Navigation Bar */
-        nav { background-color: #27ae60; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* Modern Navigation */
+        nav { background-color: #1e8449; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .logo { color: white; font-size: 1.6rem; font-weight: bold; text-decoration: none; letter-spacing: 1px;}
         .nav-links a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 1.1rem; transition: color 0.3s ease; }
         .nav-links a:hover { color: #d5f5e3; }
 
-        /* Beautiful Green Hero Banner */
-        .hero { background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; text-align: center; padding: 90px 20px; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px; box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2); }
-        .hero h1 { font-size: 3.2rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
-        .hero p { font-size: 1.25rem; max-width: 650px; margin: 0 auto 30px auto; line-height: 1.6; opacity: 0.9; }
-        .hero-btn { display: inline-block; background-color: white; color: #27ae60; padding: 14px 30px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .hero-btn:hover { background-color: #f1f1f1; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.25); }
+        /* Hero Banner - Focused on Researchers */
+        .hero { background: linear-gradient(135deg, #27ae60, #1e8449); color: white; text-align: center; padding: 100px 20px; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .hero p { font-size: 1.3rem; max-width: 750px; margin: 0 auto 35px auto; line-height: 1.6; opacity: 0.95; }
+        .hero-btn { display: inline-block; background-color: white; color: #1e8449; padding: 15px 35px; text-decoration: none; border-radius: 30px; font-weight: bold; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 2px solid transparent; }
+        .hero-btn:hover { background-color: #f1f1f1; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
 
-        /* Grid Section for Topics */
-        .features-section { padding: 60px 20px; text-align: center; max-width: 1200px; margin: auto; }
-        .features-section h2 { color: #2c3e50; font-size: 2.2rem; margin-bottom: 40px; }
+        /* Network Section (BiotechNotesHub & BioLaunchPad) */
+        .network-section { padding: 80px 20px; background-color: white; text-align: center; }
+        .network-section h2 { font-size: 2.5rem; margin-bottom: 50px; color: #27ae60; }
         
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 35px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); transition: all 0.3s ease; border-top: 5px solid #2ecc71; text-align: left; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
-        .card h3 { color: #27ae60; margin-top: 0; font-size: 1.4rem; margin-bottom: 15px;}
-        .card p { color: #555; font-size: 1rem; line-height: 1.6; margin-bottom: 0;}
+        .ecosystem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1000px; margin: auto; }
+        .brand-card { padding: 40px 30px; border-radius: 20px; text-align: left; transition: transform 0.3s ease; position: relative; overflow: hidden; }
+        .brand-card:hover { transform: translateY(-10px); }
         
-        /* Minimal Footer */
-        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 25px; margin-top: 40px; font-size: 0.9rem;}
+        .notes-hub { background: linear-gradient(145deg, #e8f8f5, #d1f2eb); border-left: 6px solid #1abc9c; }
+        .launch-pad { background: linear-gradient(145deg, #ebf5fb, #d6eaf8); border-left: 6px solid #3498db; }
+        
+        .brand-card h3 { font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; }
+        .notes-hub h3 { color: #16a085; }
+        .launch-pad h3 { color: #2980b9; }
+        .brand-card p { font-size: 1.05rem; line-height: 1.7; color: #444; }
+        .brand-badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; }
+        .badge-notes { background-color: #1abc9c; color: white; }
+        .badge-launch { background-color: #3498db; color: white; }
+
+        /* Research Domains Section */
+        .domains-section { padding: 60px 20px; max-width: 1200px; margin: auto; text-align: center; }
+        .domains-section h2 { font-size: 2.2rem; margin-bottom: 40px; color: #2c3e50; }
+        .domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .domain-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-bottom: 4px solid #27ae60; }
+        .domain-card h4 { font-size: 1.2rem; color: #27ae60; margin-top: 0; }
+        .domain-card p { font-size: 0.95rem; color: #666; }
+
+        /* Footer */
+        footer { background-color: #2c3e50; color: #bdc3c7; text-align: center; padding: 30px; margin-top: 40px; font-size: 0.95rem; }
+    </footer>
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="logo">🌿 BiotechNotesHub</a>
+        <a href="index.html" class="logo">🧬 Research Portal</a>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <a href="research.html">Latest Research</a>
+            <a href="research.html">Literature Search</a>
         </div>
     </nav>
 
     <div class="hero">
-        <h1>Welcome to BiotechNotesHub</h1>
-        <p>Your ultimate destination for exploring life sciences, advancing research, and finding smart study notes for your next big milestone.</p>
-        <a href="research.html" class="hero-btn">Explore AI Research Hub</a>
+        <h1>Smart Literature Search for Life Sciences</h1>
+        <p>Accelerate your literature review. Search the latest publications in Plant Biotechnology, Nanobiotechnology, and beyond. Generate instant AI-powered study notes directly from Europe PMC databases.</p>
+        <a href="research.html" class="hero-btn">🔍 Search Research Papers Now</a>
     </div>
 
-    <div class="features-section">
-        <h2>Explore Our Focus Areas</h2>
-        <div class="grid-container">
-            <div class="card">
-                <h3>🌱 Plant Biotechnology</h3>
-                <p>Dive deep into plant tissue culture, genetic modifications, and sustainable agricultural biology.</p>
+    <div class="network-section">
+        <h2>Explore Our Educational Ecosystem</h2>
+        <div class="ecosystem-grid">
+            
+            <div class="brand-card notes-hub">
+                <span class="brand-badge badge-notes">Core Life Sciences</span>
+                <h3>BiotechNotesHub</h3>
+                <p>Your premium repository for core biological concepts. Whether you are mastering secondary metabolite production, diving into plant tissue culture, or preparing for high-stakes exams like CSIR NET, DBT-BET, and GATE BT, this hub provides structured, easy-to-understand study materials.</p>
             </div>
-            <div class="card">
-                <h3>🔬 Nanobiotechnology</h3>
-                <p>Discover how nanotechnology is revolutionizing diagnostics, secondary metabolite production, and targeted therapies.</p>
+
+            <div class="brand-card launch-pad">
+                <span class="brand-badge badge-launch">Career & Development</span>
+                <h3>BioLaunchPad</h3>
+                <p>Designed to bridge the gap between academic learning and a successful research career. Discover resources for Ph.D. guidance, dry-lab computational biology skills, and professional development tools tailored for upcoming scientific innovators.</p>
             </div>
-            <div class="card">
-                <h3>📚 Exam Preparation</h3>
-                <p>Access high-quality study materials, notes, and strategies to help you crack CSIR NET, DBT-BET, and GATE BT.</p>
+
+        </div>
+    </div>
+
+    <div class="domains-section">
+        <h2>Primary Research Domains</h2>
+        <div class="domain-grid">
+            <div class="domain-card">
+                <h4>🌱 Plant Biotechnology</h4>
+                <p>Focusing on tissue culture, genetic engineering, and agricultural innovations.</p>
             </div>
-            <div class="card">
-                <h3>💻 Computational Biology</h3>
-                <p>Explore dry-lab techniques, bioinformatics tools, and modern data analysis in the life sciences.</p>
+            <div class="domain-card">
+                <h4>🔬 Nanobiotechnology</h4>
+                <p>Bridging nanomaterials with biological systems for advanced applications.</p>
+            </div>
+            <div class="domain-card">
+                <h4>🧪 Secondary Metabolites</h4>
+                <p>Extraction and analysis of high-value compounds from plant systems.</p>
+            </div>
+            <div class="domain-card">
+                <h4>💻 Computational Biology</h4>
+                <p>Integrating dry-lab techniques and bioinformatics for modern data analysis.</p>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 BiotechNotesHub. Built for the Life Science Community.</p>
+        <p>&copy; 2026 BiotechNotesHub & BioLaunchPad Network. <br> Designed to support the academic journey of scholars and researchers by Robin Kumar.</p>
     </footer>
 
 </body>
 </html>
+
 
