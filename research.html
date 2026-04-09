@@ -3,75 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biotech Research & AI Assistant</title>
+    <title>AI Research Portal | Hub24</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; color: #333; }
-        nav { background-color: #2c3e50; padding: 15px; text-align: center; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1rem; }
-        nav a:hover { color: #27ae60; }
-        
-        .header-section { text-align: center; margin: 40px 0 20px 0; }
-        .header-section h1 { color: #2c3e50; font-size: 2.5rem; margin-bottom: 10px; }
-        .header-section p { color: #7f8c8d; font-size: 1.1rem; margin-bottom: 20px;}
-        
-        /* Search Bar Styling */
-        .search-container { text-align: center; margin-bottom: 40px; }
-        .search-input { padding: 12px 20px; font-size: 1rem; width: 60%; max-width: 500px; border: 2px solid #bdc3c7; border-radius: 30px 0 0 30px; outline: none; }
-        .search-input:focus { border-color: #2980b9; }
-        .search-btn { padding: 12px 25px; font-size: 1rem; background-color: #2980b9; color: white; border: 2px solid #2980b9; border-radius: 0 30px 30px 0; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .search-btn:hover { background-color: #34495e; border-color: #34495e; }
+        /* Modern Variables */
+        :root {
+            --bg-color: #f0fdf4;
+            --text-color: #1f2937;
+            --text-muted: #4b5563;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --hero-bg: linear-gradient(135deg, #10b981, #059669);
+            --primary: #10b981;
+            --btn-ai: linear-gradient(45deg, #8e44ad, #9b59b6);
+        }
 
-        .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px; }
-        .paper-card { background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease; display: flex; flex-direction: column; border-top: 4px solid #27ae60; }
-        .paper-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .paper-title { font-size: 1.2rem; color: #2c3e50; margin-top: 0; margin-bottom: 10px; line-height: 1.4; }
-        .paper-authors { font-size: 0.9rem; color: #555; margin-bottom: 10px; font-style: italic; }
-        .paper-journal { font-size: 0.85rem; background-color: #e8f8f5; color: #16a085; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 15px; font-weight: bold; }
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --hero-bg: linear-gradient(135deg, #064e3b, #022c22);
+            --primary: #10b981;
+        }
+
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-color); transition: 0.3s; overflow-x: hidden; }
         
+        /* Glassmorphism Navigation */
+        nav { background-color: var(--nav-bg); backdrop-filter: blur(10px); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .logo { color: var(--primary); font-size: 1.6rem; font-weight: 700; text-decoration: none; letter-spacing: 1px; }
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-basic-link { color: var(--text-color); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .nav-basic-link:hover { color: var(--primary); }
+        
+        /* Attractive Navbar Buttons */
+        .nav-btn { padding: 8px 18px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .btn-notes { background: linear-gradient(45deg, #1abc9c, #16a085); }
+        .btn-notes:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4); }
+        .btn-launch { background: linear-gradient(45deg, #3498db, #2980b9); }
+        .btn-launch:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4); }
+        
+        .theme-toggle { background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: 0.3s; color: var(--text-color);}
+        .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+        /* Header Section */
+        .header-section { text-align: center; margin: 50px 20px 20px 20px; animation: fadeUp 0.8s ease-out; }
+        .header-section h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 700; background: var(--hero-bg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-section p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Super Sexy Search Bar & Voice Search */
+        .search-container { display: flex; justify-content: center; align-items: center; max-width: 700px; margin: 0 auto 30px auto; position: relative; gap: 10px;}
+        .search-input { width: 100%; padding: 15px 25px; font-size: 1.1rem; border: 2px solid #cbd5e1; border-radius: 30px; outline: none; background: var(--card-bg); color: var(--text-color); transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Poppins', sans-serif;}
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 5px 20px rgba(16, 185, 129, 0.2); }
+        
+        .voice-btn { background: white; border: 2px solid #cbd5e1; font-size: 1.2rem; cursor: pointer; padding: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; width: 55px; height: 55px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);}
+        .voice-btn:hover { border-color: #ef4444; color: #ef4444; transform: scale(1.05); }
+        
+        .search-btn { background: var(--hero-bg); color: white; border: none; padding: 15px 35px; font-size: 1.1rem; font-weight: 600; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); font-family: 'Poppins', sans-serif;}
+        .search-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5); }
+
+        /* Quick Filters / Chips */
+        .filters-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 800px; margin: 0 auto 50px auto; }
+        .chip { background: var(--card-bg); color: var(--text-muted); border: 1px solid #cbd5e1; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: 0.3s; font-family: 'Poppins', sans-serif;}
+        .chip:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* Paper Grid */
+        .research-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 60px 20px; }
+        
+        .paper-card { background: var(--card-bg); border-radius: 20px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; border-top: 4px solid var(--primary); backdrop-filter: blur(10px); animation: fadeUp 0.6s ease-out backwards;}
+        .paper-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        
+        .paper-title { font-size: 1.25rem; color: var(--text-color); margin-top: 0; margin-bottom: 12px; line-height: 1.4; font-weight: 700; }
+        .paper-authors { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; font-style: italic; }
+        .paper-journal { font-size: 0.85rem; background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 6px; display: inline-block; margin-bottom: 20px; font-weight: 600; }
+        
+        /* Action Buttons */
         .button-group { display: flex; gap: 10px; margin-top: auto; }
-        .read-btn { flex: 1; text-decoration: none; background-color: #2980b9; color: white; text-align: center; padding: 10px; border-radius: 6px; font-weight: bold; transition: background 0.3s ease; font-size: 0.9rem;}
-        .read-btn:hover { background-color: #1a5276; }
+        .read-btn { flex: 1; text-decoration: none; background: #334155; color: white; text-align: center; padding: 12px; border-radius: 10px; font-weight: 600; transition: 0.3s; font-size: 0.9rem;}
+        .read-btn:hover { background: #1e293b; }
         
-        /* AI Button Styling */
-        .ai-btn { flex: 1; background-color: #8e44ad; color: white; border: none; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 0.9rem;}
-        .ai-btn:hover { background-color: #732d91; }
+        .ai-btn { flex: 1; background: var(--btn-ai); color: white; border: none; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 0.9rem; font-family: 'Poppins', sans-serif;}
+        .ai-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(142, 68, 173, 0.4); }
 
-        .loading { text-align: center; font-size: 1.2rem; color: #7f8c8d; grid-column: 1 / -1; }
+        .loading { text-align: center; font-size: 1.2rem; color: var(--primary); font-weight: 600; grid-column: 1 / -1; margin-top: 20px;}
+        .listening { border-color: #ef4444; color: #ef4444; animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html">Home</a>
-        <a href="research.html">Latest Research</a>
+        <a href="index.html" class="logo">🧬 Hub24</a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-basic-link">Home</a>
+            <a href="https://biotechnoteshub.blogspot.com/p/home.html" target="_blank" class="nav-btn btn-notes">BiotechNotesHub</a>
+            <a href="https://www.biolaunchpad.online/p/home.html" target="_blank" class="nav-btn btn-launch">BioLaunchPad</a>
+            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</button>
+        </div>
     </nav>
 
     <div class="header-section">
-        <h1>Smart Biotech Research Hub</h1>
-        <p>Search papers and generate instant AI study notes.</p>
+        <h1>AI Literature Hub</h1>
+        <p>Type, click, or use Voice Search 🎤 to find the latest Life Science publications.</p>
     </div>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="E.g., CRISPR, Tissue Culture, Nanoparticles..." onkeypress="handleKeyPress(event)">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search CRISPR, Plant Tissue Culture..." onkeypress="handleKeyPress(event)">
+        <button id="voice-btn" class="voice-btn" onclick="startVoiceSearch()" title="Search by Voice">🎤</button>
         <button class="search-btn" onclick="executeSearch()">Search</button>
     </div>
 
+    <div class="filters-container">
+        <button class="chip" onclick="quickSearch('Plant Biotechnology')">🌱 Plant Biotech</button>
+        <button class="chip" onclick="quickSearch('Nanobiotechnology')">🔬 Nanobiotech</button>
+        <button class="chip" onclick="quickSearch('CRISPR Cas9')">🧬 CRISPR</button>
+        <button class="chip" onclick="quickSearch('Secondary Metabolites')">🧪 Metabolites</button>
+        <button class="chip" onclick="quickSearch('Bioinformatics')">💻 Bioinformatics</button>
+    </div>
+
     <div id="research-container" class="research-grid">
-        <p class="loading">Loading latest research...</p>
+        <p class="loading">Fetching latest intelligence...</p>
     </div>
 
     <script>
-        // Default load
-        window.onload = () => fetchLatestResearch('Plant Biotechnology OR Nanobiotechnology');
+        // 1. Theme Logic (Syncs with index.html)
+        const themeBtn = document.getElementById('theme-btn');
+        let isDark = localStorage.getItem('theme') === 'dark';
 
-        // Handle Enter key in search box
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                executeSearch();
+        function applyTheme() {
+            if(isDark) {
+                document.body.setAttribute('data-theme', 'dark');
+                themeBtn.innerText = '☀️';
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeBtn.innerText = '🌙';
             }
         }
+        applyTheme();
 
-        // Search trigger
+        function toggleTheme() {
+            isDark = !isDark;
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        // 2. Voice Search Logic (Web Speech API)
+        function startVoiceSearch() {
+            const voiceBtn = document.getElementById('voice-btn');
+            const searchInput = document.getElementById('searchInput');
+
+            // Check browser compatibility
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert("Sorry, your browser does not support Voice Search. Please use Google Chrome or Edge.");
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                voiceBtn.classList.add('listening');
+                searchInput.placeholder = "Listening... Speak now";
+            };
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript;
+                searchInput.value = speechResult;
+                executeSearch(); // Automatically search after speaking
+            };
+
+            recognition.onspeechend = function() {
+                recognition.stop();
+                voiceBtn.classList.remove('listening');
+                searchInput.placeholder = "Search CRISPR, Plant Tissue Culture...";
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech recognition error:", event.error);
+                voiceBtn.classList.remove('listening');
+                searchInput.placeholder = "Search CRISPR, Plant Tissue Culture...";
+            };
+
+            recognition.start();
+        }
+
+        // 3. Search & API Fetch Logic
+        window.onload = () => fetchLatestResearch('Plant Biotechnology OR Nanobiotechnology');
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') executeSearch();
+        }
+
+        function quickSearch(topic) {
+            document.getElementById('searchInput').value = topic;
+            executeSearch();
+        }
+
         function executeSearch() {
             const query = document.getElementById('searchInput').value;
             if(query.trim() !== "") {
@@ -83,7 +225,7 @@
 
         async function fetchLatestResearch(searchQuery) {
             const container = document.getElementById('research-container');
-            container.innerHTML = '<p class="loading">Searching databases...</p>';
+            container.innerHTML = '<p class="loading">⏳ Scanning databases...</p>';
 
             const formattedQuery = encodeURIComponent(searchQuery); 
             const apiUrl = `https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=${formattedQuery}&format=json&resultType=lite&pageSize=12&sort_date=y`;
@@ -94,7 +236,7 @@
                 displayPapers(data.resultList.result);
             } catch (error) {
                 console.error('Error fetching data:', error);
-                container.innerHTML = '<p class="loading">Failed to load papers. Please check your connection.</p>';
+                container.innerHTML = '<p class="loading" style="color: #ef4444;">❌ Failed to load papers. Please check your internet connection.</p>';
             }
         }
 
@@ -103,26 +245,29 @@
             let html = '';
 
             if(papers.length === 0) {
-                container.innerHTML = '<p class="loading">No papers found for this topic.</p>';
+                container.innerHTML = '<p class="loading">No papers found. Try another keyword.</p>';
                 return;
             }
 
-            papers.forEach(paper => {
+            papers.forEach((paper, index) => {
                 const title = paper.title ? paper.title.replace(/'/g, "\\'") : 'Untitled Paper';
                 const authors = paper.authorString ? paper.authorString : 'Unknown Authors';
                 const journal = paper.journalTitle || 'Unknown Journal';
                 const year = paper.pubYear || '';
                 const link = paper.doi ? `https://doi.org/${paper.doi}` : `https://europepmc.org/article/MED/${paper.pmid}`;
+                
+                // Add staggered animation delay for a cool cascade effect
+                const delay = index * 0.1;
 
                 html += `
-                    <div class="paper-card">
+                    <div class="paper-card" style="animation-delay: ${delay}s;">
                         <h3 class="paper-title">${paper.title}</h3>
                         <p class="paper-authors">${authors}</p>
                         <div><span class="paper-journal">${journal} ${year ? `(${year})` : ''}</span></div>
                         
                         <div class="button-group">
                             <a href="${link}" target="_blank" class="read-btn">Read Paper</a>
-                            <button onclick="useAI('${title}')" class="ai-btn">🧠 AI Summary</button>
+                            <button onclick="useAI('${title}')" class="ai-btn">🧠 AI Notes</button>
                         </div>
                     </div>
                 `;
@@ -131,27 +276,18 @@
             container.innerHTML = html;
         }
 
-        // AI Feature Logic
+        // 4. Smart AI Prompting
         function useAI(paperTitle) {
-            // Highly optimized prompt for exam prep and research
-            const promptText = `Act as an expert in Biotechnology. I am currently reviewing a research paper titled: "${paperTitle}". 
+            const promptText = `Act as an expert in Biotechnology. I am reviewing the paper: "${paperTitle}". \n\nPlease provide:\n1. A concise summary.\n2. Key methodologies (dry/wet lab).\n3. Essential takeaways for someone preparing for CSIR NET or DBT-BET exams.`;
 
-Please provide:
-1. A very concise summary of the main discovery.
-2. The key methodologies used (e.g., dry-lab or wet-lab techniques).
-3. Important takeaways that would be highly relevant for a researcher focusing on Plant Biotechnology, and specifically highlight points useful for someone preparing for competitive exams like CSIR NET Life Science or DBT-BET.`;
-
-            // Copy to clipboard
             navigator.clipboard.writeText(promptText).then(() => {
-                alert("✅ AI Prompt copied to your clipboard!\n\nClick OK to open Google Gemini. Just paste (Ctrl+V) the text there to get your smart study notes.");
-                // Opens AI tool in a new tab
+                alert("✅ AI Prompt copied!\n\nClick OK to open Google Gemini. Just paste (Ctrl+V) there to get your smart study notes.");
                 window.open('https://gemini.google.com/', '_blank');
             }).catch(err => {
                 console.error('Failed to copy: ', err);
-                alert("Error copying text. Please try again.");
+                alert("Error copying. Please try again.");
             });
         }
     </script>
-
 </body>
 </html>
